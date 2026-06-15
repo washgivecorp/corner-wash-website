@@ -1615,11 +1615,30 @@ const HubspotForm = ({ portalId, formId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("submitting");
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ firstname: "", lastname: "", email: "", phone: "", message: "" });
-      console.log("HubSpot Submission Voided in Background. Data:", formData);
-    }, 800);
+    const endpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+    const body = {
+      fields: Object.entries(formData).map(([name, value]) => ({ name, value })),
+      context: {
+        pageUri: window.location.href,
+        pageName: document.title
+      }
+    };
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ firstname: "", lastname: "", email: "", phone: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error("HubSpot Submission Error:", err);
+      setStatus("error");
+    }
   };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -2404,6 +2423,16 @@ const TermsOfUse = () => {
       /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "You warrant that you are of sound mind and competent to agree to the terms of this Agreement and your use of the Website does not violate any law, regulation, ordinance, statute, or treaty that is applicable to individuals or other entities located in the jurisdiction in which you live or conduct business. You further warrant that you are not prohibited from entering into this Agreement by the terms of any pre-existing agreement. If you are accessing or using the Website on behalf of a governmental organization, non-governmental organization, or business Corner Wash Laundry, you warrant that you are an authorized agent of said organization or Corner Wash Laundry and that you have the authority to bind said organization or Corner Wash Laundry to the terms of this Agreement." }),
       /* @__PURE__ */ jsx("h2", { style: { color: "var(--color-primary)", marginTop: "var(--spacing-lg)", marginBottom: "var(--spacing-sm)" }, children: "Privacy Policy" }),
       /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "Corner Wash Laundry hereby incorporates its Privacy Policy by reference as if fully restated herein." }),
+      /* @__PURE__ */ jsx("h2", { style: { color: "var(--color-primary)", marginTop: "var(--spacing-lg)", marginBottom: "var(--spacing-sm)" }, children: "SMS Notification Program" }),
+      /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "By providing your phone number when placing a laundry order with Corner Wash Laundry, you consent to receive transactional SMS text message notifications regarding your order status. These messages may include order confirmations, driver en-route alerts, and delivery confirmations." }),
+      /* @__PURE__ */ jsxs("ul", { style: { marginBottom: "var(--spacing-md)", paddingLeft: "2rem" }, children: [
+        /* @__PURE__ */ jsx("li", { children: "Message frequency varies based on order activity (typically 2–3 messages per order)" }),
+        /* @__PURE__ */ jsx("li", { children: "Message and data rates may apply depending on your carrier plan" }),
+        /* @__PURE__ */ jsx("li", { children: "To opt out at any time, reply STOP to any message" }),
+        /* @__PURE__ */ jsx("li", { children: "To re-subscribe, reply START" }),
+        /* @__PURE__ */ jsx("li", { children: "For help, reply HELP or contact us at (619) 284-6741" })
+      ] }),
+      /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "Consent to receive SMS messages is not required as a condition of purchasing any goods or services. Corner Wash Laundry does not share your phone number with third parties for marketing purposes." }),
       /* @__PURE__ */ jsx("h2", { style: { color: "var(--color-primary)", marginTop: "var(--spacing-lg)", marginBottom: "var(--spacing-sm)" }, children: "Ownership of Content and Intellectual Property" }),
       /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "Corner Wash Laundry is the owner of all rights in, and to, the Website and its associated content, including, but not limited to, copyright rights, trademark rights, patent rights, rights of publicity and privacy, trade secret rights, and any other property or proprietary rights. The Website is subject to copyright and other intellectual property rights under the laws of the United States, foreign states, as well as international treaties, and Corner Wash Laundry provides you with the right to use the Website on a limited basis. You are expressly prohibited from using the Website for any purposes not stated in this Agreement." }),
       /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "Corner Wash Laundry hereby provides you with a limited, non-exclusive, non-assignable, non-sublicensable, revocable license to use the Website for its customary and intended purposes. Use of the Website for a purpose outside of its customary and intended purposes or in violation of the terms of this Agreement will result in the immediate termination of this license. This license is revocable at any time, and any rights not expressly granted herein are reserved to Corner Wash Laundry." }),
@@ -2478,6 +2507,11 @@ const PrivacyPolicy = () => {
       ] }),
       /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)", fontWeight: 600 }, children: "Specifically, we may use your phone number to communicate with you via calls, SMS, or MMS (multimedia messages) to provide delivery updates, schedule changes, and other important information regarding your orders. By providing your phone number and using our services, you consent to receive such communications." }),
       /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "This website uses the Google AdWords remarketing service to advertise on third party websites (including Google) to previous visitors to our site. Third-party vendors, including Google, use cookies to serve ads based on someone’s past visits to our website." }),
+      /* @__PURE__ */ jsx("h2", { style: { color: "var(--color-primary)", marginTop: "var(--spacing-lg)", marginBottom: "var(--spacing-sm)" }, children: "SMS & Text Message Communications" }),
+      /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "Corner Wash Laundry collects your phone number when you place a pickup or delivery order. We use your phone number solely to send transactional SMS notifications about your order, including pickup confirmations, driver en-route alerts, and delivery confirmations." }),
+      /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "We do not sell, rent, share, or disclose your phone number or any personally identifiable information to third parties for marketing purposes. Your phone number will never be used for promotional or marketing messages." }),
+      /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "You may opt out of SMS notifications at any time by replying STOP to any message. After opting out, you will receive a single confirmation message and no further messages will be sent. To re-subscribe, reply START." }),
+      /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "Message and data rates may apply. For help, reply HELP to any message or call us at (619) 284-6741." }),
       /* @__PURE__ */ jsx("h2", { style: { color: "var(--color-primary)", marginTop: "var(--spacing-lg)", marginBottom: "var(--spacing-sm)" }, children: "How do you store this information?" }),
       /* @__PURE__ */ jsx("p", { style: { marginBottom: "var(--spacing-md)" }, children: "Corner Wash Laundry stores and processes your personal and personally identifiable information on computers located within the United States. We use commercially standard technology to help protect against the unauthorized disclosure of your information, including encryption." }),
       /* @__PURE__ */ jsx("h2", { style: { color: "var(--color-primary)", marginTop: "var(--spacing-lg)", marginBottom: "var(--spacing-sm)" }, children: "Do you share my information?" }),
