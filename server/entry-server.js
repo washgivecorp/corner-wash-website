@@ -449,7 +449,7 @@ const Footer = () => {
     }, children: [
       /* @__PURE__ */ jsxs("div", { className: "mobile-center", style: { display: "flex", flexDirection: "column", gap: "0.25rem" }, children: [
         /* @__PURE__ */ jsx("p", { style: { fontSize: "0.85rem", opacity: 0.8, fontWeight: 800, textTransform: "uppercase", margin: 0 }, children: "© 2026 Corner Wash San Diego. All rights reserved." }),
-        /* @__PURE__ */ jsx("p", { style: { fontSize: "0.75rem", opacity: 0.6, fontWeight: 800, textTransform: "uppercase", margin: 0 }, children: "Powered by Wash & Give" })
+        /* @__PURE__ */ jsx("p", { style: { fontSize: "0.75rem", opacity: 0.6, fontWeight: 800, textTransform: "uppercase", margin: 0 }, children: "Powered by Wash & Give Corp." })
       ] }),
       /* @__PURE__ */ jsxs("div", { className: "mobile-center", style: { display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end", width: "auto" }, children: [
         /* @__PURE__ */ jsxs("a", { href: "https://www.google.com/maps/place/Corner+Wash/@32.762884,-117.119973,17z/data=!3m1!4b1!4m6!3m5!1s0x80d954499d690747:0x8797f3780562e106!8m2!3d32.762884!4d-117.119973!16s%2Fg%2F1tf7w_m3", target: "_blank", rel: "noreferrer", style: { backgroundColor: "white", border: "1px solid #ddd", padding: "4px 12px", borderRadius: "4px", display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", boxShadow: "0 2px 4px rgba(0,0,0,0.05)", transition: "0.2s" }, children: [
@@ -544,6 +544,43 @@ const Bubbles = ({ isGlobal = true }) => {
     bubble.id
   )) });
 };
+const LOCAL_BUSINESS_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Laundry",
+  "name": "Corner Wash Laundry",
+  "image": "https://cornerwashlaundry.com/og-image.jpg",
+  "url": "https://cornerwashlaundry.com",
+  "telephone": "(619) 284-6741",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "3501 Adams Ave",
+    "addressLocality": "San Diego",
+    "addressRegion": "CA",
+    "postalCode": "92116",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 32.7726,
+    "longitude": -117.1251
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "07:00",
+      "closes": "21:00"
+    }
+  ],
+  "priceRange": "$$",
+  "servesCuisine": null,
+  "description": "San Diego's premier ozone-sanitized laundromat in Normal Heights. Wash & fold, pickup & delivery, dry cleaning, and self-service since 1975.",
+  "areaServed": {
+    "@type": "City",
+    "name": "San Diego"
+  },
+  "sameAs": []
+};
 const SEO = ({ title, description, path = "" }) => {
   const siteName = "Corner Wash Laundry";
   const fullTitle = `${title} | ${siteName}`;
@@ -560,7 +597,8 @@ const SEO = ({ title, description, path = "" }) => {
     /* @__PURE__ */ jsx("meta", { property: "twitter:card", content: "summary_large_image" }),
     /* @__PURE__ */ jsx("meta", { property: "twitter:url", content: url }),
     /* @__PURE__ */ jsx("meta", { property: "twitter:title", content: fullTitle }),
-    /* @__PURE__ */ jsx("meta", { property: "twitter:description", content: description || defaultDescription })
+    /* @__PURE__ */ jsx("meta", { property: "twitter:description", content: description || defaultDescription }),
+    /* @__PURE__ */ jsx("script", { type: "application/ld+json", children: JSON.stringify(LOCAL_BUSINESS_SCHEMA) })
   ] });
 };
 const washFoldImg = "/assets/wash_fold_table_art-BLuggGDU.png";
@@ -643,7 +681,7 @@ const Home = () => {
             transform: "rotate(-1.5deg)"
           }, children: content.home.hero.badge }) }),
           /* @__PURE__ */ jsxs("h1", { className: "hero-title", children: [
-            "Your Eco-Friendly ",
+            "San Diego's Eco-Friendly ",
             /* @__PURE__ */ jsx("br", {}),
             /* @__PURE__ */ jsx("span", { style: { color: "#04D1FF" }, children: "Laundromat" })
           ] }),
@@ -3713,9 +3751,9 @@ const SpreadTheSuds = () => {
     ] }) })
   ] });
 };
-function AppSSR({ url }) {
+function AppSSR({ url, helmetContext }) {
   const content = siteContent;
-  return /* @__PURE__ */ jsx(HelmetProvider, { children: /* @__PURE__ */ jsxs(StaticRouter, { location: url, children: [
+  return /* @__PURE__ */ jsx(HelmetProvider, { context: helmetContext, children: /* @__PURE__ */ jsxs(StaticRouter, { location: url, children: [
     /* @__PURE__ */ jsx(
       Marquee,
       {
@@ -3757,10 +3795,12 @@ function AppSSR({ url }) {
   ] }) });
 }
 function render(url) {
+  const helmetContext = {};
   const html = renderToString(
-    /* @__PURE__ */ jsx(React.StrictMode, { children: /* @__PURE__ */ jsx(AppSSR, { url }) })
+    /* @__PURE__ */ jsx(React.StrictMode, { children: /* @__PURE__ */ jsx(AppSSR, { url, helmetContext }) })
   );
-  return { html };
+  const { helmet } = helmetContext;
+  return { html, helmet };
 }
 export {
   render
