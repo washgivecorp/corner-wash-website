@@ -21,7 +21,7 @@ const common = {
     email: "cornerwashlaundry@gmail.com"
   },
   marquee: [
-    "TUESDAY & THURSDAY SPECIAL 40-LB WASHERS ONLY $4.50 7–9 AM & 6–7:30 PM",
+    "TUESDAY & THURSDAY SPECIAL 40-LB WASHERS ONLY $4.75 7–9 AM & 6–7:30 PM",
     "OZONE-SANITIZED WATER TECHNOLOGY - KILLS 99.9% OF BACTERIA",
     "FAMILY OWNED & OPERATED SINCE 1975",
     "GET 10% OFF HOUSEHOLD ITEMS WITH EVERY $45+ WASH & FOLD ORDER!",
@@ -1871,10 +1871,10 @@ const Pricing = () => {
         /* @__PURE__ */ jsxs("div", { style: { border: "var(--brutalist-border)", padding: "1.75rem", backgroundColor: "var(--color-primary)" }, children: [
           /* @__PURE__ */ jsx("h3", { style: { color: "var(--color-funky-cyan)", fontFamily: "var(--font-heading)", textTransform: "uppercase", letterSpacing: "0.1em", fontSize: "0.9rem", marginBottom: "1rem" }, children: "Washers" }),
           [
-            { label: "20 lb (8 Total)", price: "$4.50" },
-            { label: "40 lb (16 Total)", price: "$6.50" },
-            { label: "60 lb (6 Total)", price: "$9.00" },
-            { label: "80 lb (3 Total)", price: "$10.75" }
+            { label: "20 lb (8 Total)", price: "$4.75" },
+            { label: "40 lb (16 Total)", price: "$6.75" },
+            { label: "60 lb (6 Total)", price: "$9.25" },
+            { label: "80 lb (3 Total)", price: "$11.00" }
           ].map((row, i) => /* @__PURE__ */ jsxs("div", { style: { display: "flex", justifyContent: "space-between", padding: "0.45rem 0px", borderBottom: "1px solid rgba(255, 255, 255, 0.15)", fontSize: "0.9rem" }, children: [
             /* @__PURE__ */ jsx("span", { style: { color: "rgba(255, 255, 255, 0.9)" }, children: row.label }),
             /* @__PURE__ */ jsx("span", { style: { fontWeight: 800, fontFamily: "var(--font-heading)", color: "var(--color-funky-yellow)" }, children: row.price })
@@ -2747,7 +2747,7 @@ const SelfServiceLaundry = () => {
           /* @__PURE__ */ jsx("h2", { style: { color: "black", fontSize: "1.2rem", fontWeight: 900, marginBottom: "0.25rem", fontFamily: "var(--font-heading)", textTransform: "uppercase" }, children: "Tuesday & Thursday Special Offer" }),
           /* @__PURE__ */ jsxs("p", { style: { fontSize: "1rem", color: "black", fontWeight: 800, margin: "0px", textTransform: "uppercase" }, children: [
             "40-lb washers are ",
-            /* @__PURE__ */ jsx("span", { style: { backgroundColor: "black", color: "#04D1FF", padding: "0 0.4rem" }, children: "$4.50" }),
+            /* @__PURE__ */ jsx("span", { style: { backgroundColor: "black", color: "#04D1FF", padding: "0 0.4rem" }, children: "$4.75" }),
             " (Save $2.00) from 7am-9am & 6pm-7:30pm"
           ] })
         ] })
