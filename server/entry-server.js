@@ -2785,10 +2785,10 @@ const SelfServiceLaundry = () => {
         /* @__PURE__ */ jsxs("div", { style: { backgroundColor: "var(--color-primary)", padding: "2rem", boxShadow: "var(--brutalist-shadow)" }, children: [
           /* @__PURE__ */ jsx("h3", { style: { color: "#04D1FF", fontFamily: "var(--font-heading)", textTransform: "uppercase", letterSpacing: "0.1em", fontSize: "1rem", marginBottom: "1rem" }, children: "Washers" }),
           [
-            { label: "20 lb (8 Total)", price: "$4.50" },
-            { label: "40 lb (16 Total)", price: "$6.50" },
-            { label: "60 lb (6 Total)", price: "$9.00" },
-            { label: "80 lb (3 Total)", price: "$10.75" }
+            { label: "20 lb (8 Total)", price: "$4.75" },
+            { label: "40 lb (16 Total)", price: "$6.75" },
+            { label: "60 lb (6 Total)", price: "$9.25" },
+            { label: "80 lb (3 Total)", price: "$11.00" }
           ].map((row, i) => /* @__PURE__ */ jsxs("div", { style: { display: "flex", justifyContent: "space-between", padding: "0.5rem 0px", borderBottom: "1px solid rgba(255, 255, 255, 0.15)" }, children: [
             /* @__PURE__ */ jsx("span", { style: { color: "rgba(255, 255, 255, 0.9)" }, children: row.label }),
             /* @__PURE__ */ jsx("span", { style: { fontWeight: 800, fontFamily: "var(--font-heading)", color: "var(--color-funky-yellow)" }, children: row.price })
